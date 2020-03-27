@@ -13,7 +13,8 @@ export default class MainSideBar extends React.Component {
             name={item.name} 
             id={item.id}
             onFolderClick={this.props.onFolderClick}
-            changeCurrentNotes={this.props.changeCurrentNotes}/>)
+            changeCurrentNotes={this.props.changeCurrentNotes}
+            />)
       
 
         return (

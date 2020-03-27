@@ -13,7 +13,8 @@ export default class HomePageContent extends React.Component {
             name={note.name}
             modified={note.modified}
             folderId={note.folderId}
-            content={note.content}/>
+            content={note.content}
+            onNoteClick={this.props.onNoteClick}/>
             )
 
 

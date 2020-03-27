@@ -10,6 +10,7 @@ handleClick(e) {
     const notes = dummyStore.notes
     this.props.onHeaderClick("")
     this.props.changeNotes(notes)
+    
 }
 
  render() {

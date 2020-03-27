@@ -10,6 +10,7 @@ handleClick(e) {
     const folderName = this.props.name
     this.props.onFolderClick(folderId, folderName)
     this.props.changeCurrentNotes(folderId)
+    
 }
 
   

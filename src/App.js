@@ -23,6 +23,7 @@ state = {
   selectedFolder: "",
   selectedFolderName: "",
   currentNotes: dummyStore.notes,
+  selectedNote: {},
 }
 
 changeCurrentFolder = (value) =>
@@ -44,7 +45,7 @@ this.setState({
 
 
 
-  changeCurrentNotes = (FolderId) => {
+changeCurrentNotes = (FolderId) => {
   
     let selectednotes = dummyStore.notes.filter(note => {
       return (note.folderId === FolderId) })
@@ -53,12 +54,16 @@ this.setState({
       })
     }
   
-  
+changeSelectedNote = (note) =>
+this.setState({
+  selectedNote: note
+})
   
   
 render() {
 
 const folderRoutePath = `/folder/${this.state.selectedFolderName}`
+const noteRoutePath = `/note/${this.state.selectedNote.name}`
 
 const homepage = (this.state.selectedFolder === "")
   ? <Route exact path="/"
@@ -66,6 +71,7 @@ const homepage = (this.state.selectedFolder === "")
             <HomePageContent
                 Folders={this.state.allFolders}
                 currentNotes={this.state.currentNotes}
+                onNoteClick={this.changeSelectedNote}
               />}
               />
   : <Route path={folderRoutePath}
@@ -73,6 +79,7 @@ const homepage = (this.state.selectedFolder === "")
             <HomePageContent
                 Folders={this.state.selectedFolder}
                 currentNotes={this.state.currentNotes}
+                onNoteClick={this.changeSelectedNote}
               />}
               />
 
@@ -81,27 +88,41 @@ const homepage = (this.state.selectedFolder === "")
       <Header 
       onHeaderClick={this.changeSelectedFolder}
       changeNotes={this.resetCurrentNotes}
+      
       />
       <div className="main_content">
       <sidebar>
-        <Route path="/" render={() =>
+        <Route exact path="/" render={() =>
+            <MainSideBar 
+            currentFolder={this.state.allFolders}
+            currentNotes={this.state.currentNotes} 
+            onFolderClick={this.changeSelectedFolder}
+            changeCurrentNotes={this.changeCurrentNotes}
+           />
+        } />
+        <Route exact path={folderRoutePath} render={() =>
             <MainSideBar 
             currentFolder={this.state.allFolders}
             currentNotes={this.state.currentNotes} 
             onFolderClick={this.changeSelectedFolder}
             changeCurrentNotes={this.changeCurrentNotes}/>
         } />
-        <Route exact path="/note-sidebar" 
+        <Route path="/note/"
             render={() => 
             <NoteSideBar 
-            currentFolder={this.state.allFolders}
+            Folders={this.state.allFolders}
             currentNotes={this.state.currentNotes}
+            selectedNote={this.state.selectedNote}
             />} 
             />
       </sidebar>
       <main> 
         {homepage}
-        <Route path="/note-main" component={NoteMain} />
+        <Route path={noteRoutePath} 
+        render={() =>
+        <NoteMain 
+        currentNote={this.state.selectedNote}/>}
+        />
       </main>
       </div>
     </div>
