@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    align-items: center;
+    width: 90%;
+   margin-left: auto;
+   margin-right: auto;
+    margin-top: 15px;
+}
+
+h1 {
+    margin-left: auto;
+    margin-right: auto;
+}
