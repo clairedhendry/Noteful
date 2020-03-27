@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from "react-router-dom"
+import {Route, Link} from "react-router-dom"
 import Header from "./Header";
 import MainSideBar from "./MainSideBar";
 import HomePageContent from "./HomePageContent";
@@ -91,7 +91,7 @@ const homepage = (this.state.selectedFolder === "")
       
       />
       <div className="main_content">
-      <div>
+      <sidebar>
         <Route exact path="/" render={() =>
             <MainSideBar 
             currentFolder={this.state.allFolders}
@@ -115,7 +115,7 @@ const homepage = (this.state.selectedFolder === "")
             selectedNote={this.state.selectedNote}
             />} 
             />
-      </div>
+      </sidebar>
       <main> 
         {homepage}
         <Route path={noteRoutePath} 

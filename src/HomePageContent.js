@@ -1,5 +1,4 @@
 import React from "react";
-import {Route} from "react-router-dom"
 import Note from "./Note";
 import "./HomePageContent.css"
 

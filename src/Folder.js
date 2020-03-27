@@ -1,7 +1,7 @@
 import React from "react";
-import {Route, NavLink} from "react-router-dom"
+import {NavLink} from "react-router-dom"
 import "./Folder.css"
-import HomePageContent from "./HomePageContent";
+
 
 export default class Folder extends React.Component {
 
