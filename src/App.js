@@ -113,6 +113,7 @@ const homepage = (this.state.selectedFolder === "")
             Folders={this.state.allFolders}
             currentNotes={this.state.currentNotes}
             selectedNote={this.state.selectedNote}
+            selectedFolder={this.state.selectedFolderName}
             />} 
             />
       </div>
