@@ -1,26 +1,28 @@
 import React from "react"
 import Folder from "./Folder"
+import { DataConsumer } from "./Context"
 
 
 
-export default class MainSideBar extends React.Component {
-    render() {
 
-        const folders = this.props.currentFolder.map(item => 
+const MainSideBar = () => (
+    <div>
+        <DataConsumer>
             
-     
-            <Folder key={item.id} 
-            name={item.name} 
-            id={item.id}
-            onFolderClick={this.props.onFolderClick}
-            changeCurrentNotes={this.props.changeCurrentNotes}
-            />)
-      
+            {value => (
+                <div>{value.state.allFolders.map(item => {
+                    return (<Folder key={item.id} 
+                        name={item.name} 
+                        id={item.id}
+                        onFolderClick={value.actions.changeSelectedFolder}
+                        changeCurrentNotes={value.actions.changeCurrentNotes}
+                        />)
+                })}
+                </div>
+            )}
+           
+        </DataConsumer>
+    </div>
+)
 
-        return (
-            <div className="main_sidebar">
-                {folders}
-            </div>
-        )
-    }
-}
+export default MainSideBar;

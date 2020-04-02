@@ -25,7 +25,6 @@ handleClick(e) {
                     className="folder"
                     onClick={(e) => 
                         this.handleClick(e)}
-                    
                     >
                     {this.props.name}
                 </NavLink>

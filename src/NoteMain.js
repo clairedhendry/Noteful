@@ -1,16 +1,24 @@
 import React from "react"
 import Note from "./Note"
+import { DataConsumer } from "./Context"
 
 
-export default class NoteMain extends React.Component {
-    render() {
-        return (
-            <div className="note_main">
-                <Note id={this.props.currentNote.id}
-                name={this.props.currentNote.name}
-                modified={this.props.currentNote.modified}/>
-                <p>{this.props.currentNote.content}</p>
-            </div>
-        )
-    }
-}
+
+const NoteMain = () => (
+    <div>
+        <DataConsumer>
+            
+            {value => (
+                <div className="note_main">
+                    <Note id={value.state.selectedNote.id}
+                    name={value.state.selectedNote.name}
+                    modified={value.state.selectedNote.modified}/>
+                    <p>{value.state.selectedNote.content}</p>
+                </div>
+            )}
+           
+        </DataConsumer>
+    </div>
+)
+
+export default NoteMain;

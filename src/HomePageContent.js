@@ -1,26 +1,30 @@
 import React from "react";
 import Note from "./Note";
 import "./HomePageContent.css"
-
-export default class HomePageContent extends React.Component {
-
-
-    render() {
-
-        const notes = this.props.currentNotes.map(note => 
-            <Note key={note.id}
-            name={note.name}
-            modified={note.modified}
-            folderId={note.folderId}
-            content={note.content}
-            onNoteClick={this.props.onNoteClick}/>
-            )
+import { DataConsumer } from "./Context"
 
 
-        return (
-            <div className="main_folder_content">
-                {notes}
-            </div>
-        )
-    }
-}
+
+const HomePageContent = () => (
+    <div>
+        <DataConsumer>
+            
+            {value => (
+                <div>{value.state.currentNotes.map(note => {
+                    return ( <Note key={note.id}
+                        id={note.id}
+                        name={note.name}
+                        modified={note.modified}
+                        folderId={note.folderId}
+                        content={note.content}
+                        changeSelectedFolder={value.actions.changeSelectedFolder}
+                        onNoteClick={value.actions.changeSelectedNote}/>)
+                })}
+                </div>
+            )}
+           
+        </DataConsumer>
+    </div>
+)
+
+export default HomePageContent;

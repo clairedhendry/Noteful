@@ -1,15 +1,16 @@
 import React from "react"
 import {Link} from "react-router-dom";
-import dummyStore from "./dummyStore";
+
 import "./Header.css"
+
 
 
 export default class Header extends React.Component {
 
 handleClick(e) {
-    const notes = dummyStore.notes
-    this.props.onHeaderClick("")
-    this.props.changeNotes(notes)
+    
+    this.props.onHeaderClick("", "")
+    
     
 }
 
@@ -23,3 +24,4 @@ handleClick(e) {
      )
  }
 }
+

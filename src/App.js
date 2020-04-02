@@ -5,131 +5,50 @@ import MainSideBar from "./MainSideBar";
 import HomePageContent from "./HomePageContent";
 import NoteMain from "./NoteMain"
 import NoteSideBar from "./NoteSidebar";
-import dummyStore from "./dummyStore";
+
 
 import './App.css';
-
-
-
-
-
+import { DataConsumer } from './Context';
 
 class App extends React.Component {
 
-
-
-state = {
-  allFolders: dummyStore.folders,
-  selectedFolder: "",
-  selectedFolderName: "",
-  currentNotes: dummyStore.notes,
-  selectedNote: {},
-}
-
-changeCurrentFolder = (value) =>
-  this.setState({
-    currentFolder: value,
-  })
-
-changeSelectedFolder = (id, name) =>
-  this.setState({
-    selectedFolder: id,
-    selectedFolderName: name,
-  })
-
-
-resetCurrentNotes = (value) =>
-this.setState({
-  currentNotes: value
-})
-
-
-
-changeCurrentNotes = (FolderId) => {
-  
-    let selectednotes = dummyStore.notes.filter(note => {
-      return (note.folderId === FolderId) })
-     this.setState({
-      currentNotes: selectednotes
-      })
-    }
-  
-changeSelectedNote = (note) =>
-this.setState({
-  selectedNote: note
-})
   
   
 render() {
 
-const folderRoutePath = `/folder/${this.state.selectedFolderName}`
-const noteRoutePath = `/note/${this.state.selectedNote.name}`
-
-const homepage = (this.state.selectedFolder === "")
-  ? <Route exact path="/"
-          render={() => 
-            <HomePageContent
-                Folders={this.state.allFolders}
-                currentNotes={this.state.currentNotes}
-                onNoteClick={this.changeSelectedNote}
-              />}
-              />
-  : <Route path={folderRoutePath}
-          render={() => 
-            <HomePageContent
-                Folders={this.state.selectedFolder}
-                currentNotes={this.state.currentNotes}
-                onNoteClick={this.changeSelectedNote}
-              />}
-              />
-
   return (
+
     <div className="main_body">
-      <Header 
-      onHeaderClick={this.changeSelectedFolder}
-      changeNotes={this.resetCurrentNotes}
-      
-      />
+      <DataConsumer>
+        {value => (
+          <Header 
+          notes={value.state.allNotes}
+          onHeaderClick={value.actions.changeSelectedFolder}
+          changeNotes={value.actions.resetCurrentNotes}
+            />
+        )}
+     
+      </DataConsumer>
       <div className="main_content">
       <div>
-        <Route exact path="/" render={() =>
-            <MainSideBar 
-            currentFolder={this.state.allFolders}
-            currentNotes={this.state.currentNotes} 
-            onFolderClick={this.changeSelectedFolder}
-            changeCurrentNotes={this.changeCurrentNotes}
-           />
-        } />
-        <Route exact path={folderRoutePath} render={() =>
-            <MainSideBar 
-            currentFolder={this.state.allFolders}
-            currentNotes={this.state.currentNotes} 
-            onFolderClick={this.changeSelectedFolder}
-            changeCurrentNotes={this.changeCurrentNotes}/>
-        } />
-        <Route path="/note/"
-            render={() => 
-            <NoteSideBar 
-            Folders={this.state.allFolders}
-            currentNotes={this.state.currentNotes}
-            selectedNote={this.state.selectedNote}
-            selectedFolder={this.state.selectedFolderName}
-            />} 
-            />
+        <Route exact path="/" component={MainSideBar}/>
+        <Route path="/folder/" component={MainSideBar}/>
+        <Route path="/note/" component={NoteSideBar}/>
       </div>
       <main> 
-        {homepage}
-        <Route path={noteRoutePath} 
-        render={() =>
-        <NoteMain 
-        currentNote={this.state.selectedNote}/>}
-        />
+      <Route exact path="/" component={HomePageContent}/>
+        <Route path="/folder/"
+         component={HomePageContent}/>
+        <Route path="/note/:noteId" component={NoteMain}/>
       </main>
       </div>
     </div>
   )
-}
+ 
 
 }
+}
+
+
 
 export default App;
