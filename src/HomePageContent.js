@@ -1,6 +1,7 @@
 import React from "react";
 import Note from "./Note";
 import "./HomePageContent.css"
+
 import { DataConsumer } from "./Context"
 
 
@@ -11,7 +12,8 @@ const HomePageContent = () => (
             
             {value => (
                 <div>{value.state.currentNotes.map(note => {
-                    return ( <Note key={note.id}
+                    return ( <Note 
+                        key={note.id}
                         id={note.id}
                         name={note.name}
                         modified={note.modified}
@@ -24,6 +26,7 @@ const HomePageContent = () => (
             )}
            
         </DataConsumer>
+       
     </div>
 )
 

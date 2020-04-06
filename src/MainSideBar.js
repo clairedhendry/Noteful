@@ -1,6 +1,8 @@
 import React from "react"
 import Folder from "./Folder"
 import { DataConsumer } from "./Context"
+import AddFolder from "./AddFolder"
+import AddNote from "./AddNote"
 
 
 
@@ -22,6 +24,8 @@ const MainSideBar = () => (
             )}
            
         </DataConsumer>
+        <AddFolder />
+        <AddNote />
     </div>
 )
 

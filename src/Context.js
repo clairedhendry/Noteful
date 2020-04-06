@@ -51,6 +51,8 @@ export class DataProvider extends React.Component {
         })
     }
 
+
+
 componentDidMount() {
     fetch("http://localhost:9090/folders", {
       method: "GET",
@@ -107,6 +109,7 @@ render() {
                     changeCurrentNotes: this.changeCurrentNotes,
                     changeSelectedNote: this.changeSelectedNote,
                     deleteNote: this.deleteNote,
+           
                 }
         }} >
             {this.props.children}
