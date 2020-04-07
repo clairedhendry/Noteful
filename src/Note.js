@@ -22,8 +22,6 @@ handleClick(e) {
     const folder = this.context.state.allFolders.find((item) => 
         this.props.folderId === item.id
      )
-  
-   
     const folderName = folder.name
   
     this.props.onNoteClick(props)
@@ -62,10 +60,8 @@ const notePath = `/note/${noteId}`
 if (this.props.disable === true) {
             return (
         <div className="note">
-            <Link 
-            id={this.props.id}
-            >
-            <h2>{this.props.name}</h2></Link>
+            
+            <h2>{this.props.name}</h2>
             <p>{this.props.modified}</p>
             <button onClick={e => this.handleClickDelete(e)}>Delete</button>     
         </div>

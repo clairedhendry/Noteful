@@ -21,13 +21,13 @@ handleSubmit(e) {
 
     const name = this.state.name.value;
     const content = this.state.content;
-    const allFolders = this.context.state.allFolders
-    const folderId = allFolders[Math.floor(Math.random() * allFolders.length)]
+    
+    const folderId = this.state.folderId
 
     const fetchData = {
         "name": name,
         "content": content,
-        "folderId": folderId.id,
+        "folderId": folderId,
     }
     
    
@@ -48,13 +48,7 @@ handleSubmit(e) {
                throw new Error(response.statusText)
            }
            })
-           
-        //    .then(data => this.setState({
-        //         folderId: data.id
-        //    }))
-        //    .then(data => this.setState({
-        //        currentNote: data
-        //    }))
+  
            .then(data => this.context.actions.updateAllNotes(data))
            .then(this.setState({
                     name: {
@@ -90,11 +84,20 @@ validateName() {
     } 
 }
 
-
+updateFolder(name) {
+    const selectedFolder = this.context.state.allFolders.find(folder =>
+        name === folder.name);
+        console.log(selectedFolder.id)
+    this.setState({
+        folderId: selectedFolder.id
+    })
+}
 
     render() {
 
         const nameError = this.validateName();
+        const options = this.context.state.allFolders.map(folder => 
+                <option key={folder.id}>{folder.name}</option>)
 
         return (
             <div>
@@ -106,6 +109,7 @@ validateName() {
                            placeholder="Name this note"
                            onChange={e => this.updateName(e.target.value)}
                            value={this.state.name.value}/>
+                           <br />
                     <label htmlFor="content">Content</label>
                     {this.state.name.touched && (<ValidationError message={nameError}/>)}
                     <input type="text"
@@ -113,7 +117,15 @@ validateName() {
                            placeholder="Content Here"
                            onChange={e => this.updateContent(e.target.value)}
                            value={this.state.content}/>
-
+                           <br />
+                    <label htmlFor="folder">Folder</label>
+                    <select id="folder_select" 
+                            onChange={e => this.updateFolder(e.target.value)}
+                            required
+                            >
+                        <option>Select a folder</option>
+                        {options}
+                    </select>
                     <button type="submit"
                             disabled={this.validateName()}>Save Note</button>
                 </form>
