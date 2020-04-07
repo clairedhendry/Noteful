@@ -5,7 +5,7 @@ export const DataContext = React.createContext();
 export class DataProvider extends React.Component {
 
 
-   state = {
+state = {
     allFolders: [],
     allNotes: [],
     selectedFolder: "",
@@ -13,45 +13,64 @@ export class DataProvider extends React.Component {
     currentNotes: [],
     selectedNote: {},
    }
-    changeCurrentFolder = (value) =>
+
+changeCurrentFolder = (value) => {
     this.setState({
         currentFolder: value,
     })
+}
     
-    changeSelectedFolder = (id, name) =>
+changeSelectedFolder = (id, name) => {
     this.setState({
         selectedFolder: id,
         selectedFolderName: name,
     })
+}
     
-    resetCurrentNotes = (value) =>
+resetCurrentNotes = (value) => {
     this.setState({
     currentNotes: value
     })
+}
     
-    changeCurrentNotes = (FolderId) => {
-    
+changeCurrentNotes = (FolderId) => {
     let selectednotes = this.state.allNotes.filter(note => {
         return (note.folderId === FolderId) })
         this.setState({
         currentNotes: selectednotes
         })
-        }
+}
     
-    changeSelectedNote = (note) =>
+changeSelectedNote = (note) => {
     this.setState({
     selectedNote: note
     })
+}
 
-    deleteNote = (noteId) => {
-        const newNotes = this.state.currentNotes.filter(note => 
-            note.id !== noteId)
-        this.setState({
-            currentNotes: newNotes
-        })
-    }
+deleteNote = (noteId) => {
+    const newNotes = this.state.allNotes.filter(note => 
+        note.id !== noteId)
+    const newCurrentNotes = this.state.currentNotes.filter(note => 
+        note.id !== noteId)
+    this.setState({
+        currentNotes: newCurrentNotes,
+        allNotes: newNotes
+    })
+}
 
+updateAllFolders = (newFolder) => {
+    const existingFolders = this.state.allFolders
+    this.setState({
+        allFolders: [...existingFolders, newFolder]
+    })
+}
 
+updateAllNotes = (newNote) => {
+    const existingNotes = this.state.allNotes;
+    this.setState({
+        allNotes: [...existingNotes, newNote]
+    })
+}
 
 componentDidMount() {
     fetch("http://localhost:9090/folders", {
@@ -109,7 +128,8 @@ render() {
                     changeCurrentNotes: this.changeCurrentNotes,
                     changeSelectedNote: this.changeSelectedNote,
                     deleteNote: this.deleteNote,
-           
+                    updateAllFolders: this.updateAllFolders,
+                    updateAllNotes: this.updateAllNotes
                 }
         }} >
             {this.props.children}
@@ -119,3 +139,4 @@ render() {
 }
 
 export const DataConsumer = DataContext.Consumer;
+

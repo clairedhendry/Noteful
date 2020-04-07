@@ -5,6 +5,9 @@ import MainSideBar from "./MainSideBar";
 import HomePageContent from "./HomePageContent";
 import NoteMain from "./NoteMain"
 import NoteSideBar from "./NoteSidebar";
+import MainHomePageContent from "./MainHomePageContent";
+
+
 
 
 import './App.css';
@@ -36,7 +39,7 @@ render() {
         <Route path="/note/" component={NoteSideBar}/>
       </div>
       <main> 
-      <Route exact path="/" component={HomePageContent}/>
+      <Route exact path="/" component={MainHomePageContent}/>
         <Route path="/folder/"
          component={HomePageContent}/>
         <Route path="/note/:noteId" component={NoteMain}/>

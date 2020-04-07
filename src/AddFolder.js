@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import ValidationError from "./Validation";
+import { DataContext } from "./Context"
 
 
 
 export default class AddFolder extends Component {
 
+    static contextType = DataContext;
 
 state = {
     name: {
@@ -28,11 +30,11 @@ handleSubmit(e) {
  const fetchData = {
      "name": name
  }
- console.log(fetchData)
+
 
  const options = {
     method: "POST",
-    header: {
+    headers: {
         "content-type": "application/json"
     },
     body: JSON.stringify(fetchData)
@@ -47,9 +49,16 @@ handleSubmit(e) {
             throw new Error(response.statusText)
         }
         })
-        .then((data) =>
-        console.log(data))
+        .then(data => this.context.actions.updateAllFolders(data))
         .catch(err => alert(`something went wrong: ${err.message}`))
+
+this.setState({
+    name: {
+        value: "",
+        touched: false
+    }
+})
+
     }
 
 
@@ -77,9 +86,12 @@ validateName() {
                            name="name"
                            placeholder="Choose a name"
                            onChange={e => this.updateName(e.target.value)}
+                           value={this.state.name.value}
                            />
                     {this.state.name.touched && (<ValidationError message={nameError}/>)}
-                    <button type="submit" className="add_folder_button">
+                    <button type="submit" 
+                            className="add_folder_button"
+                            disabled={this.validateName()}>
                         Add
                     </button>
                 </form>

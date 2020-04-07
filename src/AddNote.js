@@ -1,33 +1,39 @@
 import React, {Component} from "react";
 import ValidationError from "./Validation"
+import { DataContext } from "./Context"
 
 export default class AddNote extends Component {
+
+static contextType = DataContext
 
 state = {
     name: {
         value: "",
         touched: false
     },
-    content: ""
+    content: "",
+    folderId: ""
+  
 }
 
 handleSubmit(e) {
     e.preventDefault();
-    
-
-    //post to notes
 
     const name = this.state.name.value;
     const content = this.state.content;
+    const allFolders = this.context.state.allFolders
+    const folderId = allFolders[Math.floor(Math.random() * allFolders.length)]
+
     const fetchData = {
         "name": name,
-        "content": content
+        "content": content,
+        "folderId": folderId.id,
     }
-    console.log(fetchData)
+    
    
     const options = {
        method: "POST",
-       header: {
+       headers: {
            "content-type": "application/json"
        },
        body: JSON.stringify(fetchData)
@@ -43,11 +49,26 @@ handleSubmit(e) {
            }
            })
            
+        //    .then(data => this.setState({
+        //         folderId: data.id
+        //    }))
+        //    .then(data => this.setState({
+        //        currentNote: data
+        //    }))
+           .then(data => this.context.actions.updateAllNotes(data))
+           .then(this.setState({
+                    name: {
+                        value: "",
+                        touched: false
+                    },
+                    content: "",
+                    folderId: ""
+                }))
            .catch(err => alert(`something went wrong: ${err.message}`))
-       }
-   
+         
+}
 
-   //clear state and reset form
+
 
 
 updateName(name) {
@@ -66,9 +87,7 @@ validateName() {
     const name = this.state.name.value.trim();
     if (name.length === 0) {
         return "Name is required";
-    } else if (name.length < 3) {
-        return "Name must be at least 3 characters long."
-    }
+    } 
 }
 
 
@@ -85,17 +104,21 @@ validateName() {
                     <input type="text"
                            name="name"
                            placeholder="Name this note"
-                           onChange={e => this.updateName(e.target.value)}/>
+                           onChange={e => this.updateName(e.target.value)}
+                           value={this.state.name.value}/>
                     <label htmlFor="content">Content</label>
                     {this.state.name.touched && (<ValidationError message={nameError}/>)}
                     <input type="text"
                            name="content"
                            placeholder="Content Here"
-                           onChange={e => this.updateContent(e.target.value)}/>
+                           onChange={e => this.updateContent(e.target.value)}
+                           value={this.state.content}/>
 
-                    <button type="submit">Save Note</button>
+                    <button type="submit"
+                            disabled={this.validateName()}>Save Note</button>
                 </form>
             </div>
         )
     }
 }
+

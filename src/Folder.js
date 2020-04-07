@@ -1,6 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom"
 import "./Folder.css"
+import PropTypes from "prop-types"
 
 
 export default class Folder extends React.Component {
@@ -32,4 +33,9 @@ handleClick(e) {
          
         )
     }
+}
+
+Folder.propTypes = {
+    id: PropTypes.string,
+    name: PropTypes.string.isRequired
 }
