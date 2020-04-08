@@ -4,7 +4,7 @@ import { DataContext } from "./Context"
 
 export default class AddNote extends Component {
 
-static contextType = DataContext
+static contextType = DataContext;
 
 state = {
     name: {
@@ -12,13 +12,14 @@ state = {
         touched: false
     },
     content: "",
-    folderId: ""
-  
+    folderId: "",
+    folderChecked: false,
+    allFolders: this.context.state.allFolders
 }
 
 handleSubmit(e) {
     e.preventDefault();
-
+    
     const name = this.state.name.value;
     const content = this.state.content;
     
@@ -56,18 +57,18 @@ handleSubmit(e) {
                         touched: false
                     },
                     content: "",
-                    folderId: ""
+                    folderId: "",
+                    folderChecked: false
                 }))
            .catch(err => alert(`something went wrong: ${err.message}`))
          
 }
 
 
-
-
 updateName(name) {
+    
     this.setState({
-        name: {value: name, touched: true}
+        name: {value: name, touched: true},
     })
 }
 
@@ -87,21 +88,43 @@ validateName() {
 updateFolder(name) {
     const selectedFolder = this.context.state.allFolders.find(folder =>
         name === folder.name);
-        console.log(selectedFolder.id)
+    if (!selectedFolder) {
+        return "Please select a folder"
+    } else {
     this.setState({
-        folderId: selectedFolder.id
+        folderId: selectedFolder.id,
+        folderChecked: true
     })
+}
+}
+
+validateFolder() {
+    if(!this.state.folderChecked) {
+  return "Please select a folder"
+}
+}
+
+validations() {
+    const name = this.state.name.value.trim();
+    if (name.length === 0) {
+        return "Name is required";
+    }; 
+    if(!this.state.folderChecked) {
+        return "Please select a folder"
+      }
 }
 
     render() {
 
         const nameError = this.validateName();
+        const folderError = this.validateFolder();
         const options = this.context.state.allFolders.map(folder => 
                 <option key={folder.id}>{folder.name}</option>)
+        
 
         return (
             <div>
-                <form className="add_note_form" onSubmit={e => this.handleSubmit(e)}>
+                <form className="add_note_form" onSubmit={e => this.handleSubmit(e)} >
                     <h2>Add a Note</h2>
                     <label htmlFor="name">Name</label>
                     <input type="text"
@@ -110,25 +133,29 @@ updateFolder(name) {
                            onChange={e => this.updateName(e.target.value)}
                            value={this.state.name.value}/>
                            <br />
-                    <label htmlFor="content">Content</label>
                     {this.state.name.touched && (<ValidationError message={nameError}/>)}
+                    <label htmlFor="content">Content</label>
                     <input type="text"
                            name="content"
                            placeholder="Content Here"
                            onChange={e => this.updateContent(e.target.value)}
                            value={this.state.content}/>
                            <br />
-                    <label htmlFor="folder">Folder</label>
+                    <label htmlFor="folder">Select a Folder</label>
                     <select id="folder_select" 
                             onChange={e => this.updateFolder(e.target.value)}
                             required
                             >
-                        <option>Select a folder</option>
+                        <option ></option>
                         {options}
                     </select>
+                    {this.state.name.folderChecked && (<ValidationError message={folderError}/>)}
                     <button type="submit"
-                            disabled={this.validateName()}>Save Note</button>
-                </form>
+                            disabled={this.validations()}>Save Note</button>
+                 </form>
+                  
+                   
+                
             </div>
         )
     }
