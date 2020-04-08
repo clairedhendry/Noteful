@@ -4,6 +4,7 @@ import { DataConsumer } from "./Context"
 import AddFolder from "./AddFolder"
 import AddNote from "./AddNote"
 import FolderError from "./ErrorBoundaries/FolderError"
+import PropTypes from "prop-types"
 import "./MainSideBar.css"
 
 
@@ -32,3 +33,14 @@ const MainSideBar = () => (
 )
 
 export default MainSideBar;
+
+MainSideBar.propTypes = {
+    context: PropTypes.shape({
+        allFolders: PropTypes.arrayOf({
+            id: PropTypes.string,
+            name: PropTypes.string,
+            onFolderClick: PropTypes.func,
+            changeCurrentNotes: PropTypes.func
+        })
+    })
+}

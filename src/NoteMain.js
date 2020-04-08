@@ -1,7 +1,7 @@
 import React from "react"
 import Note from "./Note"
 import { DataConsumer } from "./Context"
-
+import PropTypes from "prop-types"
 
 
 const NoteMain = () => (
@@ -23,3 +23,14 @@ const NoteMain = () => (
 )
 
 export default NoteMain;
+
+NoteMain.propTypes = {
+    context: PropTypes.shape({
+        selectedNote: PropTypes.shape({
+            id: PropTypes.string,
+            name: PropTypes.string,
+            modified: PropTypes.string,
+            content: PropTypes.string
+        })
+    })
+}

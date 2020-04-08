@@ -2,6 +2,7 @@ import React from "react"
 import {Link} from "react-router-dom"
 import "./NoteSideBar.css"
 import { DataConsumer } from "./Context"
+import PropTypes from "prop-types"
 
 
 
@@ -20,3 +21,9 @@ const NoteSideBar = () => (
 )
 
 export default NoteSideBar;
+
+NoteSideBar.propTypes = {
+    context: PropTypes.shape({
+        selectedFolderName: PropTypes.string
+    })
+}

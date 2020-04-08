@@ -37,5 +37,7 @@ handleClick(e) {
 
 Folder.propTypes = {
     id: PropTypes.string,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    onFolderClick: PropTypes.func,
+    changeCurrentNotes: PropTypes.func
 }

@@ -3,6 +3,7 @@ import Note from "./Note";
 import "./HomePageContent.css"
 import NoteError from "./ErrorBoundaries/NoteError";
 import { DataConsumer } from "./Context"
+import PropTypes from "prop-types"
 
 
 
@@ -32,3 +33,16 @@ const MainHomePageContent = () => (
 )
 
 export default MainHomePageContent;
+
+MainHomePageContent.propTypes = {
+    context: PropTypes.shape({
+        allNotes: PropTypes.arrayOf({
+            id: PropTypes.string,
+            name: PropTypes.string,
+            modified: PropTypes.string,
+            content: PropTypes.string,
+            changeSelectedFolder: PropTypes.func,
+            onNoteClick: PropTypes.func
+        })
+    })
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import Note from "./Note";
 import "./HomePageContent.css"
-
+import PropTypes from "prop-types"
 import { DataConsumer } from "./Context"
 
 
@@ -31,3 +31,17 @@ const HomePageContent = () => (
 )
 
 export default HomePageContent;
+
+HomePageContent.propTypes = {
+    context: PropTypes.shape({
+        currentNotes: PropTypes.arrayOf({
+            id: PropTypes.string,
+            name: PropTypes.string,
+            modified: PropTypes.string,
+            folderId: PropTypes.string,
+            content: PropTypes.string,
+            changeSelectedFolder: PropTypes.func,
+            onNoteClick: PropTypes.func
+        })
+    })
+}
