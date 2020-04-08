@@ -88,6 +88,6 @@ Note.propTypes = {
     folderId: PropTypes.string,
     content: PropTypes.string,
     context: PropTypes.shape({
-        allFolders: PropTypes.array
+        allFolders: PropTypes.array.isRequired
     })
 }

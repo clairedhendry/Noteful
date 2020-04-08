@@ -37,12 +37,12 @@ export default MainHomePageContent;
 MainHomePageContent.propTypes = {
     context: PropTypes.shape({
         allNotes: PropTypes.arrayOf({
-            id: PropTypes.string,
-            name: PropTypes.string,
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
             modified: PropTypes.string,
             content: PropTypes.string,
-            changeSelectedFolder: PropTypes.func,
-            onNoteClick: PropTypes.func
+            changeSelectedFolder: PropTypes.func.isRequired,
+            onNoteClick: PropTypes.func.isRequired
         })
     })
 }

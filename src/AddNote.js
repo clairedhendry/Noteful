@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import ValidationError from "./Validation"
 import { DataContext } from "./Context"
-
+import PropTypes from "prop-types"
 export default class AddNote extends Component {
 
 static contextType = DataContext;
@@ -14,7 +14,6 @@ state = {
     content: "",
     folderId: "",
     folderChecked: false,
-    allFolders: this.context.state.allFolders
 }
 
 handleSubmit(e) {
@@ -159,5 +158,11 @@ validations() {
             </div>
         )
     }
+}
+
+AddNote.propTypes = {
+    context: PropTypes.shape({
+        allFolders: PropTypes.array.isRequired
+    })
 }
 

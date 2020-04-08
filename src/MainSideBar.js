@@ -37,10 +37,10 @@ export default MainSideBar;
 MainSideBar.propTypes = {
     context: PropTypes.shape({
         allFolders: PropTypes.arrayOf({
-            id: PropTypes.string,
-            name: PropTypes.string,
-            onFolderClick: PropTypes.func,
-            changeCurrentNotes: PropTypes.func
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            onFolderClick: PropTypes.func.isRequired,
+            changeCurrentNotes: PropTypes.func.isRequired
         })
     })
 }

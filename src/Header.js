@@ -26,5 +26,5 @@ handleClick(e) {
 }
 
 Header.propTypes = {
-    onHeaderClick: PropTypes.func
+    onHeaderClick: PropTypes.func.isRequired
 }

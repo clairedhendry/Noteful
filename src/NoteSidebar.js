@@ -24,6 +24,6 @@ export default NoteSideBar;
 
 NoteSideBar.propTypes = {
     context: PropTypes.shape({
-        selectedFolderName: PropTypes.string
+        selectedFolderName: PropTypes.string.isRequired
     })
 }

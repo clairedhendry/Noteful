@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import ValidationError from "./Validation";
 import { DataContext } from "./Context"
+import PropTypes from "prop-types"
 
 
 
@@ -98,4 +99,10 @@ validateName() {
             </div>
         )
     }
+}
+
+AddFolder.propTypes = {
+    context: PropTypes.shape({
+        updateAllFolders: PropTypes.func
+    })
 }
