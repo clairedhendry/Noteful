@@ -122,7 +122,7 @@ export default class NoteEdit extends React.Component {
     
     render() {
 
-        const { id, folder_id, name, content } = this.state
+        const { name, content } = this.state
         const options = this.context.state.allFolders.map(folder => 
             <option key={folder.id}>{folder.name}</option>)
 

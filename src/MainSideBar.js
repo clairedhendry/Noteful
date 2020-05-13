@@ -34,13 +34,13 @@ const MainSideBar = () => (
 
 export default MainSideBar;
 
-// MainSideBar.propTypes = {
-//     context: PropTypes.shape({
-//         allFolders: PropTypes.arrayOf({
-//             id: PropTypes.number.isRequired,
-//             name: PropTypes.string.isRequired,
-//             onFolderClick: PropTypes.func.isRequired,
-//             changeCurrentNotes: PropTypes.func.isRequired
-//         })
-//     })
-// }
+MainSideBar.propTypes = {
+    context: PropTypes.shape({
+        allFolders: PropTypes.arrayOf({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            onFolderClick: PropTypes.func.isRequired,
+            changeCurrentNotes: PropTypes.func.isRequired
+        })
+    })
+}

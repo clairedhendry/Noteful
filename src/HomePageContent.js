@@ -32,16 +32,16 @@ const HomePageContent = () => (
 
 export default HomePageContent;
 
-// HomePageContent.propTypes = {
-//     context: PropTypes.shape({
-//         currentNotes: PropTypes.arrayOf({
-//             id: PropTypes.string,
-//             name: PropTypes.string,
-//             modified: PropTypes.string,
-//             folderId: PropTypes.string,
-//             content: PropTypes.string,
-//             changeSelectedFolder: PropTypes.func,
-//             onNoteClick: PropTypes.func
-//         })
-//     })
-// }
+HomePageContent.propTypes = {
+    context: PropTypes.shape({
+        currentNotes: PropTypes.arrayOf({
+            id: PropTypes.number,
+            name: PropTypes.string,
+            date_modified: PropTypes.string,
+            folderId: PropTypes.string,
+            content: PropTypes.string,
+            changeSelectedFolder: PropTypes.func,
+            onNoteClick: PropTypes.func
+        })
+    })
+}

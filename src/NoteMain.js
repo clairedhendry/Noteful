@@ -28,9 +28,9 @@ export default NoteMain;
 NoteMain.propTypes = {
     context: PropTypes.shape({
         selectedNote: PropTypes.shape({
-            id: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
-            modified: PropTypes.string.isRequired,
+            date_modified: PropTypes.string.isRequired,
             content: PropTypes.string.isRequired
         })
     })

@@ -61,7 +61,7 @@ if (this.props.disable === true) {
             
             <h2>{this.props.name}</h2>
             <p>{this.props.date_modified}</p>
-            {/* <button onClick={e => this.handleClickDelete(e)}>Delete</button>      */}
+           
             <Link to={{pathname: `/note/edit/${noteId}`, state: { id: `${noteId}`}}}>Edit</Link>
             
         </div>
@@ -83,7 +83,7 @@ if (this.props.disable === true) {
 }
 
 Note.propTypes = {
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     modified: PropTypes.string,
     folderId: PropTypes.string,

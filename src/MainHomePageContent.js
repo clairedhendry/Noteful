@@ -1,7 +1,7 @@
 import React from "react";
 import Note from "./Note";
 import "./HomePageContent.css"
-import NoteError from "./ErrorBoundaries/NoteError";
+
 import { DataConsumer } from "./Context"
 import PropTypes from "prop-types"
 
@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 const MainHomePageContent = () => (
 
     <div>
-        {/* <NoteError> */}
+       
         <DataConsumer>
             
             {value => (
@@ -28,21 +28,21 @@ const MainHomePageContent = () => (
                 </div>
             )}
         </DataConsumer>
-        {/* </ NoteError>  */}
+   
     </div>
 )
 
 export default MainHomePageContent;
 
-// MainHomePageContent.propTypes = {
-//     context: PropTypes.shape({
-//         allNotes: PropTypes.arrayOf({
-//             id: PropTypes.string.isRequired,
-//             name: PropTypes.string.isRequired,
-//             modified: PropTypes.string,
-//             content: PropTypes.string,
-//             changeSelectedFolder: PropTypes.func.isRequired,
-//             onNoteClick: PropTypes.func.isRequired
-//         })
-//     })
-// }
+MainHomePageContent.propTypes = {
+    context: PropTypes.shape({
+        allNotes: PropTypes.arrayOf({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            date_modified: PropTypes.string,
+            content: PropTypes.string,
+            changeSelectedFolder: PropTypes.func.isRequired,
+            onNoteClick: PropTypes.func.isRequired
+        })
+    })
+}
