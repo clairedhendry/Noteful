@@ -12,7 +12,8 @@ const NoteMain = () => (
                 <div className="note_main">
                     <Note id={value.state.selectedNote.id}
                     name={value.state.selectedNote.name}
-                    modified={value.state.selectedNote.modified}
+                    folder_id={value.state.selectedNote.folder_id}
+                    date_modified={value.state.selectedNote.date_modified}
                     disable={true}/>
                     <p>{value.state.selectedNote.content}</p>
                 </div>

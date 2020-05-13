@@ -27,7 +27,7 @@ handleSubmit(e) {
     const fetchData = {
         "name": name,
         "content": content,
-        "folderId": folderId,
+        "folder_id": folderId,
     }
     
    
@@ -40,7 +40,7 @@ handleSubmit(e) {
     }
    
    
-       fetch(`http://localhost:9090/notes`, options)
+       fetch(`http://localhost:8000/api/notes`, options)
            .then(response => {
            if(response.ok) {
                return response.json();

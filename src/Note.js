@@ -12,15 +12,13 @@ export default class Note extends React.Component {
 //       }
 static contextType = DataContext;
 
-state = {
-    folder: ""
-}
+
 
 handleClick(e) {
     const props = this.props
-    const folderId = this.props.folderId
+    const folderId = this.props.folder_id
     const folder = this.context.state.allFolders.find((item) => 
-        this.props.folderId === item.id
+        this.props.folder_id === item.id
      )
     const folderName = folder.name
   
@@ -32,23 +30,23 @@ handleClickDelete(e) {
   e.preventDefault();
   const noteId = this.props.id;
 
-fetch(`http://localhost:9090/notes/${noteId}`, {
+    fetch(`http://localhost:8000/api/notes/${noteId}`, {
     method: "DELETE",
     header: {
         "content-type": "application/json"
     }
     })
-    .then(response => {
-    if(response.ok) {
-        return response.json();
-    } else {
-        throw new Error(response.statusText)
-    }
-    })
+    // .then(response => {
+    // if(response.ok) {
+    //     return response.json();
+    // } else {
+    //     throw new Error(response.statusText)
+    // }
+    // })
     .then(() =>
     this.context.actions.deleteNote(noteId))
     .catch(err => alert(`something went wrong: ${err.message}`))
-}
+    }
 
 
 
@@ -62,8 +60,10 @@ if (this.props.disable === true) {
         <div className="note">
             
             <h2>{this.props.name}</h2>
-            <p>{this.props.modified}</p>
-            <button onClick={e => this.handleClickDelete(e)}>Delete</button>     
+            <p>{this.props.date_modified}</p>
+            {/* <button onClick={e => this.handleClickDelete(e)}>Delete</button>      */}
+            <Link to={{pathname: `/note/edit/${noteId}`, state: { id: `${noteId}`}}}>Edit</Link>
+            
         </div>
     )} else {
         return (
@@ -73,8 +73,9 @@ if (this.props.disable === true) {
             id={this.props.id}
             >
             <h2>{this.props.name}</h2></Link>
-            <p>{this.props.modified}</p>
-            <button onClick={e => this.handleClickDelete(e)}>Delete</button>     
+            <p>{this.props.date_modified}</p>
+            <button onClick={e => this.handleClickDelete(e)}>Delete</button> 
+            <Link to={{pathname: `/note/edit/${noteId}`, state: { id: `${noteId}`}}}>Edit</Link>    
         </div>
         )
     }

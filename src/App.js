@@ -6,16 +6,12 @@ import HomePageContent from "./HomePageContent";
 import NoteMain from "./NoteMain"
 import NoteSideBar from "./NoteSidebar";
 import MainHomePageContent from "./MainHomePageContent";
-
-
-
+import NoteEdit from "./NoteEdit"
 
 import './App.css';
 import { DataConsumer } from './Context';
 
 class App extends React.Component {
-
-  
   
 render() {
 
@@ -30,7 +26,6 @@ render() {
           changeNotes={value.actions.resetCurrentNotes}
             />
         )}
-     
       </DataConsumer>
       <div className="main_content">
       <div>
@@ -40,9 +35,10 @@ render() {
       </div>
       <main> 
       <Route exact path="/" component={MainHomePageContent}/>
-        <Route path="/folder/"
+        <Route path="/folder/:folder_id"
          component={HomePageContent}/>
-        <Route path="/note/:noteId" component={NoteMain}/>
+      <Route exact path="/note/:note_id" component={NoteMain}/>
+      <Route path="/note/edit/:note_id" component={NoteEdit}/>
       </main>
       </div>
     </div>

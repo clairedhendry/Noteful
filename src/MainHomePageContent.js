@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 const MainHomePageContent = () => (
 
     <div>
-        <NoteError>
+        {/* <NoteError> */}
         <DataConsumer>
             
             {value => (
@@ -19,8 +19,8 @@ const MainHomePageContent = () => (
                         key={note.id}
                         id={note.id}
                         name={note.name}
-                        modified={note.modified}
-                        folderId={note.folderId}
+                        date_modified={note.date_modified}
+                        folder_id={note.folder_id}
                         content={note.content}
                         changeSelectedFolder={value.actions.changeSelectedFolder}
                         onNoteClick={value.actions.changeSelectedNote}/>)
@@ -28,21 +28,21 @@ const MainHomePageContent = () => (
                 </div>
             )}
         </DataConsumer>
-        </ NoteError> 
+        {/* </ NoteError>  */}
     </div>
 )
 
 export default MainHomePageContent;
 
-MainHomePageContent.propTypes = {
-    context: PropTypes.shape({
-        allNotes: PropTypes.arrayOf({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-            modified: PropTypes.string,
-            content: PropTypes.string,
-            changeSelectedFolder: PropTypes.func.isRequired,
-            onNoteClick: PropTypes.func.isRequired
-        })
-    })
-}
+// MainHomePageContent.propTypes = {
+//     context: PropTypes.shape({
+//         allNotes: PropTypes.arrayOf({
+//             id: PropTypes.string.isRequired,
+//             name: PropTypes.string.isRequired,
+//             modified: PropTypes.string,
+//             content: PropTypes.string,
+//             changeSelectedFolder: PropTypes.func.isRequired,
+//             onNoteClick: PropTypes.func.isRequired
+//         })
+//     })
+// }

@@ -5,7 +5,6 @@ import { DataConsumer } from "./Context"
 import PropTypes from "prop-types"
 
 
-
 const NoteSideBar = () => (
     <div>
         <DataConsumer>

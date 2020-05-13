@@ -35,7 +35,7 @@ resetCurrentNotes = (value) => {
     
 changeCurrentNotes = (FolderId) => {
     let selectednotes = this.state.allNotes.filter(note => {
-        return (note.folderId === FolderId) })
+        return (note.folder_id === FolderId) })
         this.setState({
         currentNotes: selectednotes
         })
@@ -72,8 +72,18 @@ updateAllNotes = (newNote) => {
     })
 }
 
+updateNote = updatedNote => {
+  const newNotes = this.state.allNotes.map(note => 
+    (note.id === updatedNote.id)
+    ? updatedNote
+    : note)
+    this.setState({
+      allNotes: newNotes
+    })
+}
+
 componentDidMount() {
-    fetch("http://localhost:9090/folders", {
+    fetch("http://localhost:8000/api/folders", {
       method: "GET",
       header: {
         "content-type": "application/json"
@@ -93,7 +103,7 @@ componentDidMount() {
     .catch(err => alert(`something went wrong: ${err.message}`))
   
   
-    fetch("http://localhost:9090/notes", {
+    fetch("http://localhost:8000/api/notes", {
       method: "GET",
       header: {
         "content-type": "application/json"
@@ -113,7 +123,8 @@ componentDidMount() {
       }))
       .catch(err => alert(`something went wrong: ${err.message}`))
   }
-    
+
+
 render() {
     return (
         <DataContext.Provider
@@ -129,7 +140,8 @@ render() {
                     changeSelectedNote: this.changeSelectedNote,
                     deleteNote: this.deleteNote,
                     updateAllFolders: this.updateAllFolders,
-                    updateAllNotes: this.updateAllNotes
+                    updateAllNotes: this.updateAllNotes,
+                    updateNote: this.updateNote
                 }
         }} >
             {this.props.children}

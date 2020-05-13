@@ -16,8 +16,8 @@ const HomePageContent = () => (
                         key={note.id}
                         id={note.id}
                         name={note.name}
-                        modified={note.modified}
-                        folderId={note.folderId}
+                        date_modified={note.date_modified}
+                        folder_id={note.folder_id}
                         content={note.content}
                         changeSelectedFolder={value.actions.changeSelectedFolder}
                         onNoteClick={value.actions.changeSelectedNote}/>)
@@ -32,16 +32,16 @@ const HomePageContent = () => (
 
 export default HomePageContent;
 
-HomePageContent.propTypes = {
-    context: PropTypes.shape({
-        currentNotes: PropTypes.arrayOf({
-            id: PropTypes.string,
-            name: PropTypes.string,
-            modified: PropTypes.string,
-            folderId: PropTypes.string,
-            content: PropTypes.string,
-            changeSelectedFolder: PropTypes.func,
-            onNoteClick: PropTypes.func
-        })
-    })
-}
+// HomePageContent.propTypes = {
+//     context: PropTypes.shape({
+//         currentNotes: PropTypes.arrayOf({
+//             id: PropTypes.string,
+//             name: PropTypes.string,
+//             modified: PropTypes.string,
+//             folderId: PropTypes.string,
+//             content: PropTypes.string,
+//             changeSelectedFolder: PropTypes.func,
+//             onNoteClick: PropTypes.func
+//         })
+//     })
+// }
