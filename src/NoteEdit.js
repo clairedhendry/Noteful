@@ -44,30 +44,6 @@ export default class NoteEdit extends React.Component {
     }
     }
 
-// componentDidMount() {
-//     const noteId = this.state.id
-//     fetch(`http://localhost:8000/api/notes/${noteId}`,{
-//         method: "GET"
-//     })
-//     .then(response => {
-//         if(response.ok) {
-//           return response.json();
-//         } else {
-//           throw new Error(response.statusText)
-//         }
-//       })
-//       .then(response => {
-//           this.setState({
-//               id: response.id,
-//               folder_id: response.folder_id,
-//               name: response.name,
-//               content: response.content
-//           })
-        
-//       })
-//       .catch(err => alert(`something went wrong: ${err.message}`))
-//     }
-    
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -90,10 +66,10 @@ export default class NoteEdit extends React.Component {
      
 
 
-        fetch(`http://localhost:8000/api/notes/${noteId}`, options)
+        fetch(`https://thawing-taiga-89295.herokuapp.com/api/notes/${noteId}`, options)
         .catch(alert(`note updated`))
         .then(
-            fetch(`http://localhost:8000/api/notes/${noteId}`, 
+            fetch(`https://thawing-taiga-89295.herokuapp.com/api/notes/${noteId}`, 
             {
                 method: "GET",
                 heaaders: {

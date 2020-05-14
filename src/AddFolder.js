@@ -42,7 +42,7 @@ handleSubmit(e) {
  }
 
 
-    fetch(`http://localhost:8000/api/folders`, options)
+    fetch(`https://thawing-taiga-89295.herokuapp.com/api/folders`, options)
         .then(response => {
         if(response.ok) {
             return response.json();

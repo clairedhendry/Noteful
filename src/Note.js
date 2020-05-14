@@ -30,7 +30,7 @@ handleClickDelete(e) {
   e.preventDefault();
   const noteId = this.props.id;
 
-    fetch(`http://localhost:8000/api/notes/${noteId}`, {
+    fetch(`https://thawing-taiga-89295.herokuapp.com/api/notes/${noteId}`, {
     method: "DELETE",
     header: {
         "content-type": "application/json"

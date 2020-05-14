@@ -40,7 +40,7 @@ handleSubmit(e) {
     }
    
    
-       fetch(`http://localhost:8000/api/notes`, options)
+       fetch(`https://thawing-taiga-89295.herokuapp.com/api/notes`, options)
            .then(response => {
            if(response.ok) {
                return response.json();

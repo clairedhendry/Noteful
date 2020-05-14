@@ -83,7 +83,7 @@ updateNote = updatedNote => {
 }
 
 componentDidMount() {
-    fetch("http://localhost:8000/api/folders", {
+    fetch("https://thawing-taiga-89295.herokuapp.com/api/folders", {
       method: "GET",
       header: {
         "content-type": "application/json"
@@ -103,7 +103,7 @@ componentDidMount() {
     .catch(err => alert(`something went wrong: ${err.message}`))
   
   
-    fetch("http://localhost:8000/api/notes", {
+    fetch("https://thawing-taiga-89295.herokuapp.com/api/notes", {
       method: "GET",
       header: {
         "content-type": "application/json"
